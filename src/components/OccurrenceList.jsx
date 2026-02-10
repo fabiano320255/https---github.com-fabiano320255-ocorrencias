@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Trash, Share2, Pencil, Smartphone, Monitor } from 'lucide-react';
+import { Trash, Share2, Pencil } from 'lucide-react';
 
-export function OccurrenceList({ occurrences, onRemove, onEdit, onShareMobile, onShareWeb, onShareSingleMobile }) {
+export function OccurrenceList({ occurrences, onRemove, onEdit, onShareSingleMobile }) {
     const [imageUrls, setImageUrls] = useState({});
 
     useEffect(() => {
@@ -87,20 +87,6 @@ export function OccurrenceList({ occurrences, onRemove, onEdit, onShareMobile, o
                 </div>
             ))}
 
-            <div className="sticky bottom-4 pt-4 bg-gradient-to-t from-slate-100 to-transparent space-y-2">
-                <button
-                    onClick={onShareMobile}
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg flex items-center justify-center transition transform active:scale-95"
-                >
-                    <Smartphone className="mr-2 h-6 w-6" /> Enviar (Celular/App)
-                </button>
-                <button
-                    onClick={onShareWeb}
-                    className="w-full bg-slate-700 hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-lg shadow-lg flex items-center justify-center transition transform active:scale-95"
-                >
-                    <Monitor className="mr-2 h-6 w-6" /> Enviar (Computador/Web)
-                </button>
-            </div>
         </div>
     );
 }

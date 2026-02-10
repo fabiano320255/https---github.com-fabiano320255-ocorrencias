@@ -38,73 +38,7 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const generateReportText = () => {
-    let message = `*RELATÓRIO DE OCORRÊNCIAS*\n`;
-    message += `📅 Data do Relatório: ${new Date().toLocaleDateString()}\n\n`;
 
-    occurrences.forEach((occ, index) => {
-      const [year, month, day] = occ.data.split('-');
-      const formattedDate = `${day}/${month}/${year}`;
-
-      message += `--------------------------------\n`;
-      message += `*#${occurrences.length - index} - ${occ.condominio.toUpperCase()}*\n`;
-      message += `📅 Data: ${formattedDate}\n`;
-      message += `📍 Local: ${occ.localEspecifico}\n`;
-      if (occ.contato) message += `👤 Contato: ${occ.contato}\n`;
-      if (occ.observacao) message += `📝 Obs: ${occ.observacao}\n`;
-    });
-    return message;
-  };
-
-  const handleShareMobile = async () => {
-    const message = generateReportText();
-    const allFiles = occurrences.flatMap(occ => occ.files || []);
-
-    if (navigator.share) {
-      try {
-        const shareData = {
-          title: 'Relatório de Ocorrências',
-          text: message,
-        };
-
-        // Only attach files if they exist and are valid Files/Blobs
-        // Note: Android often fails if mixing types or too many files.
-        // We try to filter for valid blobs
-        const validFiles = allFiles.filter(f => f instanceof File || f instanceof Blob);
-
-        if (validFiles.length > 0) {
-          // Re-wrap blobs as Files if needed to ensure they have names/types
-          const processedFiles = validFiles.map((f, i) => {
-            if (f instanceof File) return f;
-            return new File([f], `evidence_${i}.jpg`, { type: f.type || 'image/jpeg' });
-          });
-          shareData.files = processedFiles;
-        }
-
-        await navigator.share(shareData);
-      } catch (error) {
-        console.error('Error sharing:', error);
-        alert('Não foi possível compartilhar nativamente. Tente a opção Web/PC.');
-      }
-    } else {
-      alert('Navegador não suporta compartilhamento nativo. Use a opção Web/PC.');
-    }
-  };
-
-  const handleShareWeb = () => {
-    const message = generateReportText();
-    // WhatsApp URL scheme
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-
-    // Check if we have images and warn user
-    const hasImages = occurrences.some(occ => occ.files && occ.files.length > 0);
-
-    if (hasImages) {
-      alert('⚠️ ATENÇÃO: O WhatsApp Web não permite enviar fotos automaticamente pelo site.\n\n1. O WhatsApp Web vai abrir com o TEXTO.\n2. Volte aqui, copie as fotos e cole na conversa manualmente.');
-    }
-
-    window.open(whatsappUrl, '_blank');
-  };
 
   const handleShareSingleMobile = async (item) => {
     const [year, month, day] = item.data.split('-');
@@ -171,8 +105,6 @@ function App() {
             occurrences={occurrences}
             onRemove={handleRemoveOccurrence}
             onEdit={handleEditOccurrence}
-            onShareMobile={handleShareMobile}
-            onShareWeb={handleShareWeb}
             onShareSingleMobile={handleShareSingleMobile}
           />
         </div>
