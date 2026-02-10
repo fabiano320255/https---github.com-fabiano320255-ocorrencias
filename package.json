@@ -1,7 +1,7 @@
 {
-  "name": "ocorrencia",
-  "private": true,
   "version": "0.0.0",
+  "name": "ocorrencia",
+  "homepage": "https://fabiano320255.github.io/ocorrencias/",
   "type": "module",
   "scripts": {
     "dev": "vite",
