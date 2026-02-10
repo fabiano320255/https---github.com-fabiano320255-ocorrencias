@@ -133,7 +133,7 @@ export function OccurrenceForm({ onAdd, editingItem, onCancelEdit }) {
                         value={formData.condominio}
                         onChange={handleChange}
                         className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3 border hover:border-indigo-300 transition"
-                        placeholder="Ex: Condomínio Solar"
+                        placeholder=" Empresa / Conjunto "
                         required
                     />
                 </div>
@@ -147,7 +147,7 @@ export function OccurrenceForm({ onAdd, editingItem, onCancelEdit }) {
                     value={formData.localEspecifico}
                     onChange={handleChange}
                     className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3 border hover:border-indigo-300 transition"
-                    placeholder="Ex: Bloco B, Apto 402 - Ralo da cozinha"
+                    placeholder="Ex: Sala 1 / Banheiro"
                     required
                 />
             </div>
