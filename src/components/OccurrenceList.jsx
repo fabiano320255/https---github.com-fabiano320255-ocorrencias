@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Trash, Share2, Pencil, Smartphone, Monitor } from 'lucide-react';
 
-export function OccurrenceList({ occurrences, onRemove, onEdit, onShareMobile, onShareWeb }) {
+export function OccurrenceList({ occurrences, onRemove, onEdit, onShareMobile, onShareWeb, onShareSingleMobile }) {
     const [imageUrls, setImageUrls] = useState({});
 
     useEffect(() => {
@@ -56,6 +56,9 @@ export function OccurrenceList({ occurrences, onRemove, onEdit, onShareMobile, o
                             </p>
                         </div>
                         <div className="flex space-x-1">
+                            <button onClick={() => onShareSingleMobile(item)} className="text-blue-600 hover:text-blue-800 p-2" title="Compartilhar este item">
+                                <Share2 className="h-5 w-5" />
+                            </button>
                             <button onClick={() => onEdit(item)} className="text-yellow-600 hover:text-yellow-800 p-2" title="Editar">
                                 <Pencil className="h-5 w-5" />
                             </button>

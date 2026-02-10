@@ -106,6 +106,44 @@ function App() {
     window.open(whatsappUrl, '_blank');
   };
 
+  const handleShareSingleMobile = async (item) => {
+    const [year, month, day] = item.data.split('-');
+    const formattedDate = `${day}/${month}/${year}`;
+
+    let message = `*OCORRÊNCIA - ${item.condominio.toUpperCase()}*\n`;
+    message += `📅 Data: ${formattedDate}\n`;
+    message += `📍 Local: ${item.localEspecifico}\n`;
+    if (item.contato) message += `👤 Contato: ${item.contato}\n`;
+    if (item.observacao) message += `📝 Obs: ${item.observacao}\n`;
+
+    const allFiles = item.files || [];
+
+    if (navigator.share) {
+      try {
+        const shareData = {
+          title: 'Ocorrência',
+          text: message,
+        };
+
+        const validFiles = allFiles.filter(f => f instanceof File || f instanceof Blob);
+
+        if (validFiles.length > 0) {
+          const processedFiles = validFiles.map((f, i) => {
+            if (f instanceof File) return f;
+            return new File([f], `evidence_${i}.jpg`, { type: f.type || 'image/jpeg' });
+          });
+          shareData.files = processedFiles;
+        }
+
+        await navigator.share(shareData);
+      } catch (error) {
+        console.error('Error sharing:', error);
+      }
+    } else {
+      alert('Navegador não suporta compartilhamento nativo.');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-100 pb-20">
       <header className="bg-white shadow-sm sticky top-0 z-10">
@@ -135,6 +173,7 @@ function App() {
             onEdit={handleEditOccurrence}
             onShareMobile={handleShareMobile}
             onShareWeb={handleShareWeb}
+            onShareSingleMobile={handleShareSingleMobile}
           />
         </div>
       </main>
