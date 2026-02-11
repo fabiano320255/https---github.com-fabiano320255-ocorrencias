@@ -7,7 +7,7 @@ export function OccurrenceForm({ onAdd, editingItem, onCancelEdit }) {
         contato: '',
         localEspecifico: '',
         observacao: '',
-        data: new Date().toISOString().split('T')[0],
+        data: new Date().toLocaleDateString('en-CA'), // Formato YYYY-MM-DD local
         files: []
     });
     const [previews, setPreviews] = useState([]);
@@ -88,7 +88,7 @@ export function OccurrenceForm({ onAdd, editingItem, onCancelEdit }) {
             contato: '',
             localEspecifico: '',
             observacao: '',
-            data: new Date().toISOString().split('T')[0],
+            data: new Date().toLocaleDateString('en-CA'),
             files: []
         });
         setPreviews([]);
