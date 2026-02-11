@@ -84,7 +84,7 @@ function App() {
         <div className="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <ClipboardList className="h-8 w-8 text-indigo-600" />
-            <h1 className="text-xl font-extrabold text-slate-800">GesOcorrências</h1>
+            <h1 className="text-xl font-extrabold text-slate-800">Spazio-JK Ocorrências</h1>
           </div>
           <div className="text-sm font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
             {occurrences.length} {occurrences.length === 1 ? 'item' : 'itens'}
